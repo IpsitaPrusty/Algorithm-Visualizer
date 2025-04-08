@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Visualizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="nav-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon">
+          <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+          <line x1="3" y1="9" x2="21" y2="9"></line>
+          <line x1="9" y1="21" x2="9" y2="9"></line>
+        </svg>
+        <span>Algorithm Visualizer</span>
+      </div>
+      <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="sorting">Sorting</button>
+        <button class="tab-btn" data-tab="pathfinding">Pathfinding</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div id="sorting-card" class="algorithm-card">
+        <div class="card-header">
+          <h2>Sorting Algorithms</h2>
+          <p>Visualize and compare different sorting algorithms</p>
+        </div>
+        <div class="card-content">
+          <div class="algorithm-buttons">
+            <button class="algo-btn active" data-algo="bubble">
+              Bubble Sort
+              <span class="complexity">O(n²)</span>
+            </button>
+            <button class="algo-btn" data-algo="selection">
+              Selection Sort
+              <span class="complexity">O(n²)</span>
+            </button>
+            <button class="algo-btn" data-algo="insertion">
+              Insertion Sort
+              <span class="complexity">O(n²)</span>
+            </button>
+            <button class="algo-btn" data-algo="merge">
+              Merge Sort
+              <span class="complexity">O(n log n)</span>
+            </button>
+            <button class="algo-btn" data-algo="quick">
+              Quick Sort
+              <span class="complexity">O(n log n)</span>
+            </button>
+          </div>
+
+          <div class="controls">
+            <div class="custom-input">
+              <input type="text" id="array-input" placeholder="e.g. 5,3,8,1,9">
+              <button id="set-array" class="control-btn">Set Array</button>
+            </div>
+            <div class="control-buttons">
+              <!-- <button id="toggle-display" class="control-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="9" y1="15" x2="15" y2="9"></line>
+                </svg>
+                Toggle View
+              </button> -->
+              <button id="reset-array" class="control-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                  <path d="M3 3v5h5"></path>
+                </svg>
+                Reset
+              </button>
+              <button id="start-sorting" class="control-btn primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Start
+              </button>
+            </div>
+            <div class="stats">
+              <div class="stat">
+                <span>Comparisons:</span>
+                <span id="comparisons">0</span>
+              </div>
+              <div class="stat">
+                <span>Swaps:</span>
+                <span id="swaps">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="array-container" class="array-container"></div>
+        </div>
+      </div>
+
+      <div id="pathfinding-card" class="algorithm-card hidden">
+        <div class="card-header">
+          <h2>Pathfinding Algorithms</h2>
+          <p>Explore various pathfinding algorithms on a grid</p>
+        </div>
+        <div class="card-content">
+          <div class="algorithm-buttons">
+            <button class="algo-btn active" data-algo="bfs">
+              BFS
+              <span class="complexity">Breadth-First Search</span>
+            </button>
+            <button class="algo-btn" data-algo="dfs">
+              DFS
+              <span class="complexity">Depth-First Search</span>
+            </button>
+            <button class="algo-btn" data-algo="dijkstra">
+              Dijkstra
+              <span class="complexity">Shortest path</span>
+            </button>
+            <button class="algo-btn" data-algo="greedy">
+              Greedy BFS
+              <span class="complexity">Greedy Best-First Search</span>
+            </button>
+          </div>
+
+          <div class="controls">
+            <div class="control-buttons">
+              <button id="generate-maze" class="control-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                  <path d="M3 3v5h5"></path>
+                </svg>
+                New Maze
+              </button>
+              <button id="lock-maze" class="control-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                Lock Maze
+              </button>
+              <button id="start-pathfinding" class="control-btn primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Start
+              </button>
+            </div>
+            <div class="stats">
+              <div class="stat">
+                <span>Visited Nodes:</span>
+                <span id="visited-nodes">0</span>
+              </div>
+              <div class="stat">
+                <span>Path Length:</span>
+                <span id="path-length">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="grid-container" class="grid-container"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="sorting.js"></script>
+  <script src="pathfinding.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
