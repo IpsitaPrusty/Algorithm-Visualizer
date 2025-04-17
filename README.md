@@ -1,1 +1,1 @@
-https://saishrita.github.io/Algorithm-Visualizer/
+(https://ipsitaprusty.github.io/Algorithm-Visualizer/)
